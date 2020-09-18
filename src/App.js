@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import TopBar from "./components/topBar/top-bar";
+import CategoryOverview from "./components/categoryOverview/category-overview.js";
+import "./App.css";
 
 function App() {
+  const questions = [
+    { category: "gaggi bollä" },
+    { category: "hallo velo" },
+    { category: "gaggi bollä" },
+    { category: "hallo velo" },
+    { category: "gaggi bollä" },
+    { category: "hallo velo" },
+    { category: "Päddi, ein Mann für alle Fälle" },
+    { category: "hallo velo" },
+    { category: "gaggi bollä" },
+    { category: "hallo velo" },
+    { category: "Päddi, ein Mann für alle Fälle" },
+    { category: "hallo velo" },
+  ];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <TopBar playerName="Nicole" points="0" />
+      <CategoryOverview questions={questions} />
     </div>
   );
 }

@@ -1,0 +1,25 @@
+.topBar {
+  background-color: #22468c;
+  height: 60px;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.playerName,
+.points {
+  font-weight: Bold;
+  color: #ffe04d;
+  display: flex;
+  align-items: center;
+}
+
+.points__icon {
+  margin-left: 15px;
+}
+
+.playerName__tag,
+.points__tag {
+  padding-right: 10px;
+  color: #fff;
+}
