@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import TopBar from "./components/topBar/top-bar";
 import CategoryOverview from "./components/categoryOverview/category-overview.js";
 import "./App.css";
+import {DataProvider} from "./ApplicationContext";
 
 function App() {
   const questions = [
@@ -20,10 +21,12 @@ function App() {
     { category: "hallo velo" },
   ];
   return (
-    <div className="app">
-      <TopBar playerName="Nicole" points="0" />
-      <CategoryOverview questions={questions} />
-    </div>
+    <DataProvider>
+      <div className="app">
+        <TopBar playerName="Nicole"/>
+        <CategoryOverview questions={questions} />
+      </div>
+    </DataProvider>
   );
 }
 

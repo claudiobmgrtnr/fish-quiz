@@ -1,14 +1,11 @@
 import React from 'react';
-import slug from 'slug'
 import './category.css'
-function Category({name, openModal}) {
-
-    const key = slug(name);
-    
+function Category({question, openModal}) {
+ 
     return (
-        <div className="category" key={key} onClick={openModal}>
+        <div className="category" key={question.id} onClick={() => openModal(question.id)}>
             <p className="categoryName">
-                {name}
+                {question.category}
             </p>
         </div>
     )

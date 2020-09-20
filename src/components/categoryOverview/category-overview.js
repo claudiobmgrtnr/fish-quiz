@@ -1,41 +1,71 @@
-import React from 'react';
-import './category-overview.css';
-import Category from '../category/category.js';
-import Modal from 'react-modal';
+import React, { useContext } from "react";
+import "./category-overview.css";
+import Category from "../category/category.js";
+import Question from "../question/question.js";
+import Modal from "react-modal";
+import { DataContext } from "../../ApplicationContext.js";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
+const customStyles = {
+  content: {
+    top: "60px",
+    left: "0",
+    right: "0",
+    bottom: "0",
+    padding: "0",
+    borderRadius: "0",
+    background: "#011540",
+    border: "none",
+  },
+  overlay: {
+    background: "none",
+  },
+};
 
-function CategoryOverview({questions}) {
+function CategoryOverview() {
+  const { questions, currentQuestion } = useContext(DataContext);
+  const [getCurrentQuestion, setCurrentQuestion] = currentQuestion;
+  const [getQuestions] = questions;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
-    const [modalIsOpen,setIsOpen] = React.useState(false);
+  function openModal(questionId) {
+    setCurrentQuestion(
+      getQuestions.filter((question) => question.id === questionId)
+    );
 
-    function openModal() {
-        setIsOpen(true);
-    }
+    setIsOpen(true);
+  }
 
-    function closeModal(){
-        setIsOpen(false);
-    }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
-    return(
-        <div className="categoryOverview">
-            <h1 className="title">
-                En rechte Palaari binenand haa
-                <span className="subTitle">The Game</span>
-            </h1>
-            <div className="categories">
-                {questions.map(question => <Category openModal={openModal} name={question.category}/>)}
-            </div>
-            <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel="Question"
-        >
-            Yo, hier wird mal die Frage stehen.
-          <button onClick={closeModal}>close</button>
-        </Modal>
-        </div>
-    )
+  return (
+    <div className="categoryOverview">
+      <h1 className="title">
+        En rechte Palaari binenand haa
+        <span className="subTitle">The Game</span>
+      </h1>
+      <div className="categories">
+        {getQuestions.map((question) => (
+          <Category
+            openModal={openModal}
+            key={question.id}
+            question={question}
+          />
+        ))}
+      </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Question"
+        style={customStyles}
+      >
+        <Question />
+        <button onClick={closeModal}>close</button>
+      </Modal>
+    </div>
+  );
 }
 
 export default CategoryOverview;
