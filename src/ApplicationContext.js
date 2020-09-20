@@ -5,13 +5,13 @@ export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
   const [getCoinCount, setCoinCount] = useState(0);
   const [getCurrentQuestion, setCurrentQuestion] = useState(null);
+  const [getAnsweredQuestions, setAnsweredQuestions] = useState([]);
   const [getQuestions, setQuestions] = useState([
     {
       category: "Quam risus taciti",
       question: "Wie viel ist 1 + 1?",
       answers: { a: 2, b: 5, c: 18, d: 22 },
       solution: "a",
-      answeredCorrect: false,
       id: slug('Quam risus taciti')
     },
     {
@@ -28,6 +28,7 @@ export const DataProvider = ({ children }) => {
         coinCount: [getCoinCount, setCoinCount],
         currentQuestion: [getCurrentQuestion, setCurrentQuestion],
         questions: [getQuestions, setQuestions],
+        answeredQuestions: [getAnsweredQuestions, setAnsweredQuestions]
       }}
     >
       {children}

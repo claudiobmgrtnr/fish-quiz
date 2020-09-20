@@ -8,8 +8,9 @@ const correctAnswer = new Audio("/correctanswer.mp3");
 const wrongAnswer = new Audio("/wronganswer.mp3");
 
 function Question() {
-  const { currentQuestion, coinCount } = useContext(DataContext);
+  const { currentQuestion, coinCount, answeredQuestions } = useContext(DataContext);
   const [getCoinCount, setCoinCount] = coinCount;
+  const [getAnsweredQuestions, setAnsweredQuestions] = answeredQuestions;
   const getCurrentQuestion = currentQuestion[0];
   const [getLoggedAnswer, setLoggedAnswer] = useState(null);
   const [getRevealCorrectAnswer, setRevealCorrectAnswer] = useState(false);
@@ -44,6 +45,7 @@ function Question() {
     theme.pause();
     theme.currentTime = 0;
 
+    setAnsweredQuestions([getCurrentQuestion[0].id, ...getAnsweredQuestions]);
     if (getLoggedAnswer !== getCurrentQuestion[0].solution) {
       wrongAnswer.play();
     } else {

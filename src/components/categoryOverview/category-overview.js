@@ -23,7 +23,8 @@ const customStyles = {
 };
 
 function CategoryOverview() {
-  const { questions, currentQuestion } = useContext(DataContext);
+  const { questions, currentQuestion, answeredQuestions } = useContext(DataContext);
+  const [getAnsweredQuestions, setAnsweredQuestions] = answeredQuestions;
   const [getCurrentQuestion, setCurrentQuestion] = currentQuestion;
   const [getQuestions] = questions;
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -49,6 +50,7 @@ function CategoryOverview() {
       <div className="categories">
         {getQuestions.map((question) => (
           <Category
+            answered={getAnsweredQuestions.indexOf(question.id) > -1}
             openModal={openModal}
             key={question.id}
             question={question}
@@ -62,7 +64,6 @@ function CategoryOverview() {
         style={customStyles}
       >
         <Question />
-        <button onClick={closeModal}>close</button>
       </Modal>
     </div>
   );

@@ -1,9 +1,18 @@
 import React from 'react';
 import './category.css'
-function Category({question, openModal}) {
- 
+import classnames from 'classnames';
+
+function Category({question, openModal, answered}) {
+    const classes = classnames('category', {answered: answered})
+
+    function openQuestion() {
+        if(answered) {
+            return;
+        }
+        openModal(question.id);
+    }
     return (
-        <div className="category" key={question.id} onClick={() => openModal(question.id)}>
+        <div className={classes} key={question.id} onClick={openQuestion}>
             <p className="categoryName">
                 {question.category}
             </p>
