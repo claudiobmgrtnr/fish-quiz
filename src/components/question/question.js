@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import Joker from "../joker/joker.js";
+import Player from '../player/player.js';
 import classnames from "classnames";
 import { DataContext } from "../../ApplicationContext.js";
 import "./question.css";
 const theme = new Audio("/music.mp3");
 const logSound = new Audio("/loganswer.mp3");
 const jokerSound = new Audio("/jokersound.mp3");
+const lauda = new Audio("/mamalauda.mp3");
 jokerSound.volume = 0.6;
 const correctAnswer = new Audio("/correctanswer.mp3");
 const wrongAnswer = new Audio("/wronganswer.mp3");
@@ -15,13 +17,13 @@ function Question() {
     DataContext
   );
   const [getCoinCount, setCoinCount] = coinCount;
+  const [getCoinWasCounted, setCoinWasCounted] = useState(false);
   const [getUsedJokers, setUsedJokers] = jokers;
   const [getAnsweredQuestions, setAnsweredQuestions] = answeredQuestions;
   const getCurrentQuestion = currentQuestion[0];
   const [getLoggedAnswer, setLoggedAnswer] = useState(null);
   const [getPlayTheme, setPlayTheme] = useState(true);
   const [getFiftyFiftyActive, setFiftyFiftyActive] = useState(false);
-  const [getArmedJoker, setArmedJoker] = useState("");
   const [getRevealCorrectAnswer, setRevealCorrectAnswer] = useState(false);
 
   function handleJokerClick(id) {
@@ -38,8 +40,8 @@ function Question() {
     switch (id) {
       case "5050":
         setFiftyFiftyActive(true);
-        setArmedJoker("");
         break;
+        
       default:
         break;
     }
@@ -47,7 +49,7 @@ function Question() {
 
   useEffect(() => {
     if (getLoggedAnswer === null && getPlayTheme) {
-      theme.play();
+      theme.play().catch(() => {});
     }
 
     return () => {
@@ -55,6 +57,16 @@ function Question() {
       theme.currentTime = 0;
     };
   });
+
+  function onClickPlay() {
+    theme.pause();
+    lauda.play();
+  }
+
+  function onClickPause() {
+    theme.play();
+    lauda.pause();
+  }
 
   function logAnswer(id) {
     if (getRevealCorrectAnswer) {
@@ -78,9 +90,10 @@ function Question() {
     setAnsweredQuestions([getCurrentQuestion[0].id, ...getAnsweredQuestions]);
     if (getLoggedAnswer !== getCurrentQuestion[0].solution) {
       wrongAnswer.play();
-    } else {
+    } else if(getCoinWasCounted === false) {
       setCoinCount(getCoinCount + 1);
       correctAnswer.play();
+      setCoinWasCounted(true);
     }
     setRevealCorrectAnswer(true);
   }
@@ -127,7 +140,8 @@ function Question() {
     <div className="question">
       <Joker handleJokerClick={handleJokerClick} />
       <div className="question-box" onClick={revealCorrectAnswer}>
-        <p>{getCurrentQuestion[0].question}</p>
+        <p dangerouslySetInnerHTML={{__html: getCurrentQuestion[0].question}}></p>
+        {getCurrentQuestion[0].id === "volklore"? <Player onClickPause={onClickPause} onClickPlay={onClickPlay}/> : null}
       </div>
       <div className="answers">{renderAnswers()}</div>
     </div>

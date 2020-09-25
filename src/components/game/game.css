@@ -1,0 +1,17 @@
+.start {
+    background-color: #ffe04d;
+    color: #011540;
+    display: inline-block;
+    padding: 20px;
+    min-width: 150px;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.startScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

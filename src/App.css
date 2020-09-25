@@ -16,7 +16,9 @@
   }
 }
 
-
+h1.title {
+  margin-bottom: 50px;
+}
 
 @keyframes appLogoSpin {
   from {

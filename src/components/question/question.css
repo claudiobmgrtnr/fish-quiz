@@ -16,8 +16,15 @@
   font-size: 24px;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.question a{
+  color: #ffe04d;
 }
 
 .answers {

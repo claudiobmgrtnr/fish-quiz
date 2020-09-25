@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./category-overview.css";
 import Category from "../category/category.js";
 import Question from "../question/question.js";
 import Modal from "react-modal";
 import { DataContext } from "../../ApplicationContext.js";
+const intro = new Audio('/intro.mp3');
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -23,9 +24,10 @@ const customStyles = {
 };
 
 function CategoryOverview() {
-  const { questions, currentQuestion, answeredQuestions } = useContext(DataContext);
+  const { questions, currentQuestion, answeredQuestions, isFirstVisit } = useContext(DataContext);
   const [getAnsweredQuestions, setAnsweredQuestions] = answeredQuestions;
   const [getCurrentQuestion, setCurrentQuestion] = currentQuestion;
+  const [getIsFirstVisit, setIsFirstVisit] = isFirstVisit;
   const [getQuestions] = questions;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -40,6 +42,7 @@ function CategoryOverview() {
   function closeModal() {
     setIsOpen(false);
   }
+
 
   return (
     <div className="categoryOverview">
