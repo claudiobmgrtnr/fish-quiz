@@ -24,3 +24,13 @@
   padding-right: 10px;
   color: #fff;
 }
+
+.mute {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mute img {
+  max-width: 30px;
+}

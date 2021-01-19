@@ -8,10 +8,25 @@
     line-height: 1;
 }
 
+.start:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .startScreen {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.nameinput {
+    margin-bottom: 40px;
+    width: 275px;
+    height: 65px;
+    text-align: center;
+    font-size: 20px;
 }

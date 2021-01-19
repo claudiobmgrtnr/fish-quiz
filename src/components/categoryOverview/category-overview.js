@@ -47,7 +47,7 @@ function CategoryOverview() {
   return (
     <div className="categoryOverview">
       <h1 className="title">
-        En rechte Palaari binenand haa
+        Wer wird Claudionär!
         <span className="subTitle">The Game</span>
       </h1>
       <div className="categories">
