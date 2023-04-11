@@ -28,10 +28,10 @@ export default function Game() {
     );
   } else {
     return (
-      <div onClick={() => intro.pause()}>
-        <TopBar playerName="Nicole" />
-        <CategoryOverview />
-      </div>
+        <div onClick={() => intro.pause()}>
+            <TopBar playerName="Dan The Man" />
+            <CategoryOverview />
+        </div>
     );
   }
 }

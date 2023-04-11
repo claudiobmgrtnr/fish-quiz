@@ -45,30 +45,29 @@ function CategoryOverview() {
 
 
   return (
-    <div className="categoryOverview">
-      <h1 className="title">
-        En rechte Palaari binenand haa
-        <span className="subTitle">The Game</span>
-      </h1>
-      <div className="categories">
-        {getQuestions.map((question) => (
-          <Category
-            answered={getAnsweredQuestions.indexOf(question.id) > -1}
-            openModal={openModal}
-            key={question.id}
-            question={question}
-          />
-        ))}
+      <div className="categoryOverview">
+          <h1 className="title">
+              Wer wird Mitarbeiter des Jahrzehnts?
+              <span className="subTitle">The Game</span>
+          </h1>
+          <div className="categories">
+              {getQuestions.map((question) => (
+                  <Category
+                      answered={getAnsweredQuestions.indexOf(question.id) > -1}
+                      openModal={openModal}
+                      key={question.id}
+                      question={question}
+                  />
+              ))}
+          </div>
+          <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Question"
+              style={customStyles}>
+              <Question />
+          </Modal>
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Question"
-        style={customStyles}
-      >
-        <Question />
-      </Modal>
-    </div>
   );
 }
 
